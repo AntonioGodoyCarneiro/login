@@ -102,6 +102,7 @@ $cadastrarPessoa = $banco->query($select)->fetch();
    
 </div>
 
-<input type="submit" class="btn btn-success mt-3" >
+<input type="submit" class="btn btn-success mt-3" hidden >
+<a class="btn btn-primary mt-3" href="loginSucesso.php">VOLTAR</a>
 </form>
 </main>

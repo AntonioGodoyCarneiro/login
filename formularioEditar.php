@@ -1,7 +1,7 @@
 <?php
 
 //Para puxar informação da URL, que nesse caso é o id_aluno
-$id_pessoa = $_GET['id_pessoa'];
+$id_pessoa_alterar = $_GET['id_pessoa_alterar'];
 
 
 $dsn = 'mysql:dbname=db_login;host=127.0.0.1';
@@ -10,7 +10,7 @@ $password = '';
 
 $banco = new PDO($dsn, $user, $password);
 
-$select = "SELECT * FROM tb_pessoa INNER JOIN tb_usuario ON tb_usuario.id_pessoa = tb_pessoa.id WHERE tb_pessoa.id= " . $id_pessoa;
+$select = "SELECT * FROM tb_pessoa INNER JOIN tb_usuario ON tb_usuario.id_pessoa = tb_pessoa.id WHERE tb_pessoa.id= " . $id_pessoa_alterar;
 
 $cadastrarPessoa = $banco->query($select)->fetch();
 
@@ -43,7 +43,7 @@ $cadastrarPessoa = $banco->query($select)->fetch();
 
     
 
-<form action="./cadastrarNovo.php" method="POST">
+<form action="enviarEditado.php" method="POST">
 
 <label for="nome">Nome:</label class="form-control">
 <input type="text"   value="<?= $cadastrarPessoa['nome'] ?>" disabled class="form-control" name="nome" >
@@ -66,17 +66,17 @@ $cadastrarPessoa = $banco->query($select)->fetch();
 <div class="row mt-2">
     <div class="col">
         <label for="telefone_1">telefone_1:</label>
-        <input type="number"  value="<?= $cadastrarPessoa['telefone_1'] ?>" disabled class="form-control" name="tel1">
+        <input type="number"  value="<?= $cadastrarPessoa['telefone_1'] ?>"  class="form-control" name="tel1">
     </div>
 
     <div class="col">
         <label for="telefone_2">telefone_2:</label>
-        <input type="number"  value="<?= $cadastrarPessoa['telefone_2'] ?>" disabled class="form-control" name="tel2">
+        <input type="number"  value="<?= $cadastrarPessoa['telefone_2'] ?>"  class="form-control" name="tel2">
     </div>
 
     <div class="col">
         <label for="logradouro">logradouro:</label>
-        <input type="text" value="<?= $cadastrarPessoa['logradouro'] ?>" disabled  class="form-control" name="rua">
+        <input type="text" value="<?= $cadastrarPessoa['logradouro'] ?>"   class="form-control" name="rua">
     </div>
 
 </div>
@@ -84,20 +84,20 @@ $cadastrarPessoa = $banco->query($select)->fetch();
 <div class="row mt-2">
     <div class="col">
         <label for="n_casa">N° :</label>
-        <input type="number"  value="<?= $cadastrarPessoa['n_casa'] ?>" disabled  class="form-control" name="n_casa">
+        <input type="number"  value="<?= $cadastrarPessoa['n_casa'] ?>"   class="form-control" name="n_casa">
     </div>
     <div class="col">
         <label for="bairro">Bairro:</label>
-        <input type="text"  value="<?= $cadastrarPessoa['bairro'] ?>" disabled class="form-control" name="bairro">
+        <input type="text"  value="<?= $cadastrarPessoa['bairro'] ?>"  class="form-control" name="bairro">
     </div>
     <div class="col">
         <label for="cidade">Cidade:</label>
-        <input type="text"  value="<?= $cadastrarPessoa['cidade'] ?>" disabled class="form-control" name="cidade">
+        <input type="text"  value="<?= $cadastrarPessoa['cidade'] ?>"  class="form-control" name="cidade">
     </div>
 </div>
     <div class="col">
         <label for="senha">Senha:</label>
-        <input type="text" value="<?= $cadastrarPessoa['senha'] ?>" disabled  class="form-control" name="senha">
+        <input type="text" value="<?= $cadastrarPessoa['senha'] ?>"   class="form-control" name="senha">
     </div>
    
 </div>
