@@ -2,9 +2,11 @@
 
 $editar_id = $_POST['id'];
 $editar_senha = $_POST['senha'];
-$editar_tel_1 = $_POST['telefone_1'];
-$editar_tel_2 = $_POST['telefone_2'];
-$editar_logradouro = $_POST['logradouro'];
+
+// Dados da tb_pessoa
+$editar_tel_1 = $_POST['tel1'];
+$editar_tel_2 = $_POST['tel2'];
+$editar_logradouro = $_POST['rua'];
 $editar_n_casa = $_POST['n_casa'];
 $editar_bairro = $_POST['bairro'];
 $editar_cidade = $_POST['cidade'];
@@ -15,7 +17,7 @@ $password = '';
 
 $banco = new PDO($dsn, $user, $password);
 
-
+// Atualizando a senha no banco de dados
 $update = 'UPDATE tb_usuario SET senha = :senha WHERE id = :id';
 
 $banco->prepare($update)->execute([
@@ -23,7 +25,7 @@ $banco->prepare($update)->execute([
     ':id' => $editar_id
 ]);
 
-
+// Atualizando os dados na tb_pessoa
 $update = 'UPDATE tb_pessoa SET telefone_1 = :tel_1, telefone_2 = :tel_2, logradouro = :logradouro, n_casa = :numero_casa, bairro = :bairro_form, cidade = :cidade_form WHERE id = :id';
 
 $banco->prepare($update)->execute([

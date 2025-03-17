@@ -12,6 +12,7 @@ $banco = new PDO($dsn, $user, $password);
 
 $select = "SELECT * FROM tb_pessoa INNER JOIN tb_usuario ON tb_usuario.id_pessoa = tb_pessoa.id WHERE tb_pessoa.id= " . $id_pessoa;
 
+
 $cadastrarPessoa = $banco->query($select)->fetch();
 
 // echo '<pre>'; //Para organizar o var_dump

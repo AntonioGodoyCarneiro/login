@@ -41,14 +41,16 @@ $box->execute([
 $usuarioForm = $_POST ['usuario'];
 $senhaForm = $_POST ['senha'];
 
+$id_pessoa = $banco->lastInsertId();
 
-$cadastrarPessoa='INSERT INTO tb_usuario (usuario, senha) VALUE (:usuario, :senha)';
+$cadastrarPessoa='INSERT INTO tb_usuario (usuario, senha, id_pessoa) VALUE (:usuario, :senha, :id_pessoa)';
 
 $box = $banco->prepare($cadastrarPessoa);
 
 $box->execute([
     ':usuario' => $usuarioForm,
     ':senha' => $senhaForm,
+    ':id_pessoa'=> $id_pessoa
 ]);
 
 echo '<script>

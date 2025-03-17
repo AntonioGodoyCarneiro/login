@@ -35,9 +35,9 @@ $resultado = $banco->query($select)->fetchAll();
                 <td>  <?=$linha['id'] ?> </td>
                 <td>  <?php echo $linha['usuario'] ?> </td>
                 <td class="text-center">
-                    <a class="btn btn-primary" href="ficha.php?id_pessoa=<?=$linha['id'] ?>">Abrir</a>
-                    <a class="btn btn-warning" href="formularioEditar.php?id_pessoa_alterar=<?=$linha['id'] ?>">Editar</a>
-                    <a class="btn btn-danger" href="avangerDeletar.php?id=<?=$linha['id'] ?>">Excluir</a>
+                    <a class="btn btn-primary" href="ficha.php?id_pessoa=<?=$linha['id_pessoa'] ?>">Abrir</a>
+                    <a class="btn btn-warning" href="formularioEditar.php?id_pessoa_alterar=<?=$linha['id_pessoa'] ?>">Editar</a>
+                    <a class="btn btn-danger" href="avangerDeletar.php?id=<?=$linha['id_pessoa'] ?>">Excluir</a>
                                                 <!-- caminho arquivo ? variável-->
                 </td>
             </tr>

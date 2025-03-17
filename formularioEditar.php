@@ -1,107 +1,116 @@
-<?php
+<!DOCTYPE html>
+<html lang="pt-br">
 
-//Para puxar informação da URL, que nesse caso é o id_aluno
-$id_pessoa_alterar = $_GET['id_pessoa_alterar'];
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Editar Pessoa</title>
+</head>
 
+<body>
+    <style>
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-$dsn = 'mysql:dbname=db_login;host=127.0.0.1';
-$user = 'root';
-$password = '';
+        form {
+            width: 600px;
+        }
+    </style>
 
-$banco = new PDO($dsn, $user, $password);
+    <main class="container text-center my-5">
+        <h2>Editar Pessoa</h2>
+        <br>
 
-$select = "SELECT * FROM tb_pessoa INNER JOIN tb_usuario ON tb_usuario.id_pessoa = tb_pessoa.id WHERE tb_pessoa.id= " . $id_pessoa_alterar;
+        <?php
+        // Conexão com o banco de $cadastrarPessoa
+        $dsn = 'mysql:dbname=db_login;host=127.0.0.1';
+        $user = 'root';
+        $password = '';
+        $banco = new PDO($dsn, $user, $password);
 
-$cadastrarPessoa = $banco->query($select)->fetch();
+        // Obtém o id_pessoa da URL
+        $id_pessoa_alterar = $_GET['id_pessoa_alterar']; 
 
-// echo '<pre>'; //Para organizar o var_dump
-// var_dump($dados);
+        // Consulta SQL para buscar os $cadastrarPessoa da pessoa e do usuário
+        $select = "SELECT tb_pessoa.*, tb_usuario.usuario, tb_usuario.senha 
+                   FROM tb_usuario 
+                   INNER JOIN tb_pessoa ON tb_usuario.id_pessoa = tb_pessoa.id 
+                   WHERE tb_usuario.id_pessoa = $id_pessoa_alterar";
 
+        // Executa a consulta
+        $cadastrarPessoa = $banco->query($select)->fetch();
+        ?>
 
-?>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <form action="enviarEditado.php" method="POST">
+            <input type="hidden" name="id" value="<?= $cadastrarPessoa['id'] ?>">
 
+            <!-- Campos da tabela tb_pessoa -->
+            <label for="nome">Nome:</label>
+            <input type="text" class="form-control" name="nome" value="<?= $cadastrarPessoa['nome'] ?>" disabled>
 
-<style>
-    main {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+            <div class="row mt-2">
+                <div class="col">
+                    <label for="telefone_1">Telefone 1:</label>
+                    <input type="text" class="form-control" name="tel1" value="<?= $cadastrarPessoa['telefone_1'] ?>">
+                </div>
+                <div class="col">
+                    <label for="telefone_2">Telefone 2:</label>
+                    <input type="text" class="form-control" name="tel2" value="<?= $cadastrarPessoa['telefone_2'] ?>">
+                </div>
+            </div>
 
-    form {
-        width: 600px;
-    }
+            <div class="row mt-2">
+                <div class="col">
+                    <label for="logradouro">Logradouro:</label>
+                    <input type="text" class="form-control" name="rua" value="<?= $cadastrarPessoa['logradouro'] ?>">
+                </div>
+                <div class="col">
+                    <label for="n_casa">Número:</label>
+                    <input type="number" class="form-control" name="n_casa" value="<?= $cadastrarPessoa['n_casa'] ?>">
+                </div>
+            </div>
 
-    img {
-        width: 200px;
-        object-fit: cover;
-    }
-</style>
+            <div class="row mt-2">
+                <div class="col">
+                    <label for="bairro">Bairro:</label>
+                    <input type="text" class="form-control" name="bairro" value="<?= $cadastrarPessoa['bairro'] ?>">
+                </div>
+                <div class="col">
+                    <label for="cidade">Cidade:</label>
+                    <input type="text" class="form-control" name="cidade" value="<?= $cadastrarPessoa['cidade'] ?>">
+                </div>
+            </div>
 
-<main class="container text-center my-5">
+            <div class="row mt-2">
+                <div class="col">
+                    <label for="cpf">CPF:</label>
+                    <input type="text" class="form-control" name="cpf" value="<?= $cadastrarPessoa['cpf'] ?>" disabled>
+                </div>
+                <div class="col">
+                    <label for="ano_nascimento">Ano de Nascimento:</label>
+                    <input type="number" class="form-control" name="ano_nascimento" value="<?= $cadastrarPessoa['ano_nascimento'] ?>" disabled>
+                </div>
+            </div>
 
-    
+            <!-- Campos da tabela tb_usuario -->
+            <div class="row mt-2">
+                <div class="col">
+                    <label for="usuario">Usuário:</label>
+                    <input type="text" class="form-control" name="usuario" value="<?= $cadastrarPessoa['usuario'] ?>" disabled>
+                </div>
+                <div class="col">
+                    <label for="senha">Senha:</label>
+                    <input type="text" class="form-control" name="senha" value="<?= $cadastrarPessoa['senha'] ?>">
+                </div>
+            </div>
 
-<form action="enviarEditado.php" method="POST">
+            <input type="submit" class="btn btn-success mt-3" value="Salvar Alterações">
+        </form>
+    </main>
+</body>
 
-<label for="nome">Nome:</label class="form-control">
-<input type="text"   value="<?= $cadastrarPessoa['nome'] ?>" disabled class="form-control" name="nome" >
-
-<label for="usuario">Usuario:</label class="form-control">
-<input type="text"  value="<?= $cadastrarPessoa['usuario'] ?>" disabled class="form-control" name="usuario">
-
-<div class="row mt-2 ">
-
-    <div class="col">
-        <label for="telefone">Ano Nascimento:</label>
-        <input type="number" value="<?= $cadastrarPessoa['ano_nascimento'] ?>" disabled  class="form-control" name="ano_nasc">
-    </div>
-
-    <div class="col">
-        <label for="cpf">cpf:</label>
-        <input type="number" value="<?= $cadastrarPessoa['cpf'] ?>" disabled  class="form-control" name="cpf">
-    </div>
-</div>
-<div class="row mt-2">
-    <div class="col">
-        <label for="telefone_1">telefone_1:</label>
-        <input type="number"  value="<?= $cadastrarPessoa['telefone_1'] ?>"  class="form-control" name="tel1">
-    </div>
-
-    <div class="col">
-        <label for="telefone_2">telefone_2:</label>
-        <input type="number"  value="<?= $cadastrarPessoa['telefone_2'] ?>"  class="form-control" name="tel2">
-    </div>
-
-    <div class="col">
-        <label for="logradouro">logradouro:</label>
-        <input type="text" value="<?= $cadastrarPessoa['logradouro'] ?>"   class="form-control" name="rua">
-    </div>
-
-</div>
-
-<div class="row mt-2">
-    <div class="col">
-        <label for="n_casa">N° :</label>
-        <input type="number"  value="<?= $cadastrarPessoa['n_casa'] ?>"   class="form-control" name="n_casa">
-    </div>
-    <div class="col">
-        <label for="bairro">Bairro:</label>
-        <input type="text"  value="<?= $cadastrarPessoa['bairro'] ?>"  class="form-control" name="bairro">
-    </div>
-    <div class="col">
-        <label for="cidade">Cidade:</label>
-        <input type="text"  value="<?= $cadastrarPessoa['cidade'] ?>"  class="form-control" name="cidade">
-    </div>
-</div>
-    <div class="col">
-        <label for="senha">Senha:</label>
-        <input type="text" value="<?= $cadastrarPessoa['senha'] ?>"   class="form-control" name="senha">
-    </div>
-   
-</div>
-
-<input type="submit" class="btn btn-success mt-3" >
-</form>
-</main>
+</html>
