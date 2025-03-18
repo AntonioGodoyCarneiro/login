@@ -30,10 +30,10 @@
 
         
         <label class="form-label">Usuário: </label>
-        <input type="text" class="form-control" name="user">
+        <input type="text" class="form-control" name="user" required>
 
         <label class="form-label">Senha: </label>
-        <input type="password" class="form-control" name="password">  
+        <input type="password" class="form-control" name="password" required>  
 
         <input class="btn btn-success mt-3" type="submit">
         <a href="esqueceuSenha.php" class="btn btn-primary mt-3">Esqueceu sua senha?</a>

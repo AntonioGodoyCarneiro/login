@@ -28,7 +28,8 @@
     <form action="./cadastrarNovo.php" method="POST">
 
         <label for="nome">Nome:</label class="form-control">
-        <input type="text"   class="form-control" name="nome">
+        <input type="text"   class="form-control" name="nome" oninput="this.value = this.value.replace(/[^A-Za-zÀ-ÿ\s]/g, '')">
+ >
 
         <label for="usuario">Usuario:</label class="form-control">
         <input type="text"   class="form-control" name="usuario">

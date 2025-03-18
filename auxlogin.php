@@ -25,5 +25,10 @@ $resultado =$banco ->query($consultarUsuarioSenha)->fetch();
 if (!empty($resultado)&& $resultado != false){
     header('location:loginSucesso.php');
 } else{
-    header('location:index.php');
+    
+    echo'<script>
+    alert("Senha ou Usuário errado!")
+    window.location.replace("index.php")
+</script>';
 }
+
