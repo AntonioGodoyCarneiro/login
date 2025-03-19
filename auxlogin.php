@@ -22,6 +22,26 @@ $consultarUsuarioSenha='SELECT * FROM tb_usuario where usuario ="'.$userForm .'"
 
 $resultado =$banco ->query($consultarUsuarioSenha)->fetch();
 
+$status = $resultado ['status'];
+?>
+
+
+
+<?php if ($status == 'adimim'){?>
+
+    <h1> BEM VINDO, AVANGERS ADMIN</h1>
+
+<?php } ?>
+
+
+
+
+<h1> BEM VINDO, AVANGERS COMUM</h1>
+
+<?php
+
+die; 
+
 if (!empty($resultado)&& $resultado != false){
     header('location:loginSucesso.php');
 } else{
